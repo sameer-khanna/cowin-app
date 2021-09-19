@@ -1,0 +1,41 @@
+<form class="example-form">
+    <mat-tab-group mat-align-tabs="start" mat-align-tabs="center" (selectedTabChange)="tabChanged($event)">
+        <mat-tab label="Search by PIN Code"></mat-tab>
+        <mat-tab label="Search by District"></mat-tab>
+    </mat-tab-group>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    <div>&nbsp;</div>
+    <div *ngIf="selectedTab == 0" style="text-align:center;">
+        <mat-form-field class="example-full-width" appearance="fill" aria-required="true">
+            <mat-label>PIN Code</mat-label>
+            <input type="pin" matInput placeholder="Ex. 123456">
+        </mat-form-field>
+    </div>
+    <div *ngIf="selectedTab == 1" style="text-align:center;">
+        <mat-form-field appearance="fill">
+            <mat-label>State</mat-label>
+            <mat-select [(ngModel)]="selectedState" name="state">
+                <mat-option *ngFor="let state of states" [value]="state.state_name"
+                    (click)="getDistricts(state.state_id)">
+                    {{state.state_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="selectedTab == 1" style="text-align:center;">
+        <mat-form-field appearance="fill">
+            <mat-label>District</mat-label>
+            <mat-select [(ngModel)]="selectedDistrict" name="district">
+                <mat-option *ngFor="let district of districts" [value]="district.district_name">
+                    {{district.district_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div style="text-align:center;">
+        <button aria-hidden=false mat-raised-button class="button" color="primary">
+            Search
+        </button>
+    </div>
+</form>
